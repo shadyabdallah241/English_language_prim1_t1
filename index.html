@@ -76,7 +76,7 @@ svg{display:block;flex:none}
 .word{font-family:"Baloo 2","Trebuchet MS",sans-serif;font-size:2.7rem;font-weight:800;color:var(--p);margin-top:12px}
 .vocab-photo{position:relative;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;border-radius:22px;margin:12px auto 0;width:min(100%,320px);background:#fff!important;border:2px solid var(--line);box-shadow:inset 0 0 40px rgba(15,157,138,.06)}
 .vocab-photo.quiz-photo{width:min(100%,260px)}.vocab-photo .photo-fallback{font-size:5rem;line-height:1}
-.vocab-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain!important;padding:12px;opacity:0;transition:opacity .25s}.vocab-photo img.loaded{opacity:1}
+.vocab-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain!important;padding:0;opacity:0;transition:opacity .25s}.vocab-photo img.loaded{opacity:1}
 .vocab-photo figcaption[hidden]{display:none}
 .vocab-photo figcaption{position:absolute;inset:auto 0 0;background:rgba(18,42,38,.82);color:#fff;padding:5px 8px;font-size:.66rem;line-height:1.35;text-align:left;overflow-wrap:anywhere}
 .vocab-photo figcaption a{color:#fff;text-decoration:underline}
@@ -119,7 +119,7 @@ nav button.on{color:#fff;background:linear-gradient(135deg,var(--p),#ff8a53);box
   .opt{padding:15px 12px;font-size:1.05rem}.btn{padding:15px}.title{font-size:1.4rem}nav button{font-size:.68rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .badge-img{width:36px;height:36px;object-fit:contain;display:block}
-.tile-img{max-width:52px;max-height:52px;object-fit:contain;display:block;margin:0 auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.14))}
+.tile-img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;display:block;margin:0 auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.14))}
 .list-img{width:32px;height:32px;object-fit:contain;display:inline-block;vertical-align:middle}
 </style>
 </head>
@@ -645,7 +645,7 @@ const ACTIONS={
  match:(v,el)=>{const g=ui.game,side=el.dataset.side,id=+v;
   if(!g.sel||g.sel.side===side){g.sel={side,id};return render();}
   if(g.sel.id===id){g.matched.push(id);g.sel=null;addStars(1);burst(el);if(g.matched.length===g.words.length){g.done=true;addStars(3);}render();}
-  else{g.no=[g.sel.side+g.sel.id,side+id];g.sel=null;render();g.no=null;}},
+  else{g.no=[g.sel.side+g.sel.id];g.sel=null;render();g.no=null;}},
  flipcard:v=>{const g=ui.game,i=+v;if(g.lock||g.open.includes(i)||g.matched.includes(g.cards[i].id))return;
   g.open.push(i);render();if(g.open.length<2)return;
   const [a,b]=g.open.map(k=>g.cards[k]);
